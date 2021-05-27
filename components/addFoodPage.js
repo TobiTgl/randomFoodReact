@@ -5,10 +5,12 @@ import { NavigationContainer } from '@react-navigation/native'
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
 import FoodListElement from './FoodListElement'
+import {Picker} from '@react-native-picker/picker';
 
 export default function AddFoodPage(props) {
     const addTextInput = React.createRef();
     const addCategoryInput = React.createRef();
+   
       
     return (
         <View style={styles.container}>
@@ -37,10 +39,25 @@ export default function AddFoodPage(props) {
             </View>
             <View style={styles.headingContainer}>
                 <View style={styles.headingName}>
-                    <Text style={{color:'white'} }>Name:</Text>
+                    <Text style={{color:'white', fontSize:16}}>Name:</Text>
                 </View>
                 <View style={styles.headingCategory}>
-                    <Text style={{color:'white'} }>Category:</Text>
+                    <Picker
+                    style={styles.picker}
+                    selectedValue={props.selectedCategory}
+                    onValueChange={(itemValue, itemIndex) =>
+                        props.setSelectCategryList(itemValue, itemIndex)
+                    }
+                    >
+                    <Picker.Item label="Category:" value="All" />
+                    <Picker.Item label="Dessert:" value="Dessert" />
+                    <Picker.Item label="Fast Food:" value="Fast Food" />
+                    <Picker.Item label="Fleischig:" value="Fleischig" />
+                    <Picker.Item label="Pasta:" value="Pasta" />
+                    <Picker.Item label="Reis:" value="Reis" />
+                    <Picker.Item label="Vegetarisch:" value="Vegetarisch" />
+                    <Picker.Item label="Sonstiges:" value="Sonstiges" />
+                </Picker>
                 </View>
             </View>
             <ScrollView>
@@ -78,11 +95,22 @@ const styles = StyleSheet.create({
     headingName:{
         alignItems: 'flex-start',
         flex:3,
+        fontSize: 20,
         color:'white'
     },
     headingCategory:{
         alignItems: 'flex-start',
-        flex:1.8,
+        flex:2,
         color:'white'
+    },
+    picker:{
+        color: 'white',
+        backgroundColor: 'green',
+        width: 180,
+       
+        fontSize: 2,
+        marginBottom:0,
+        height: 25
+
     }
   });

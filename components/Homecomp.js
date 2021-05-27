@@ -19,6 +19,7 @@ export default function Homecomp(props) {
     const [foodCategory, setfoodCategory] = useState('Nothing');
     const [foodArr, setFoodArr] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('All');
+    const [selectedCategoryList, setSelectedCategoryList] = useState('All');
     
     useEffect(()=>{localStoreGet()}, [])
 
@@ -117,6 +118,35 @@ export default function Homecomp(props) {
         setSelectedCategory(itemValue)
         
     }
+    setSelectCategryList=async(itemValue, itemIndex)=>{
+        
+        setSelectedCategoryList(itemValue)
+        /*
+        const arrOhneCat = foodArr
+        if(selectedCategoryList !== 'All'){
+            const arrayMitCat = arrOhneCat.filter(food => food.category === selectedCategoryList)
+            console.log(arrayMitCat+"filter" + selectedCategoryList)
+            setFoodArr(arrayMitCat)
+            
+        }else{
+            try {
+                const jsonValue = await AsyncStorage.getItem('foodArr')
+                console.log(jsonValue)
+                const fok = JSON.parse(jsonValue)
+                fok.sort((a, b) => (a.category > b.category) ? 1 : (a.category === b.category) ? ((a.name > b.name) ? 1 : -1) : -1 )
+                console.log(jsonValue+"sorted")
+                setFoodArr(fok)
+                
+                return jsonValue != null ? JSON.parse(jsonValue) : null;
+            } catch(e) {
+                // error reading value
+
+                console.log(e)
+            }
+            
+        }
+        */
+    }
     
 
     return (
@@ -174,7 +204,8 @@ export default function Homecomp(props) {
                                 onTypeCategory = {eingabeAddCategory}
                                 onDeleteClick = {onDeleteClick}
                                 selectedCategory = {selectedCategory}
-                                setSelectCategry={setSelectCategry}
+                                setSelectCategryList={setSelectCategryList}
+                                
                             >
 
                             </AddFoodPage>
