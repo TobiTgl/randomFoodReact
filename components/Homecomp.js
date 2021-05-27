@@ -10,70 +10,114 @@ import AddFoodPage from './AddFoodPage';
 import { Ionicons } from 'react-native-vector-icons';
 import { Entypo } from '@expo/vector-icons'; 
 import { FontAwesome } from '@expo/vector-icons'; 
-
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Homecomp(props) {
     
     const [food, setFood] = useState('Nothing');
-    const [randomFood, setRandomFood] = useState('');
-    const [foodArr, setFoodArr] = useState([
-        
-            {
-                "id": "1",
-                "name": "HAMBURGOAR"
-            },
-            {
-                "id": "2",
-                "name": "Bredle"
+    const [randomFood, setRandomFood] = useState('Random Food');
+    const [foodCategory, setfoodCategory] = useState('Nothing');
+    const [foodArr, setFoodArr] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState('All');
     
-    
-            },
-            {
-                "id": "3",
-                "name": "Collla"
-    
-    
-            },
-            {
-                "id": "4",
-                "name": "Collla"
-    
-    
-            }
-            ,
-            {
-                "id": "5",
-                "name": "Collla"
-    
-    
-            }
-        
-        
-    ]);
+    useEffect(()=>{localStoreGet()}, [])
 
     const Tab = createBottomTabNavigator();
 
-    insertNewFood=()=>{
+    insertNewFood=async()=>{
         const foodName = food
         const id = uuidv4()
+        const category = foodCategory
         console.log(id)
         let newArr = [...foodArr]
     
-        newArr.push({id: id, name: foodName})
+        newArr.push({id: id, name: foodName, category: foodCategory})
     
         setFoodArr(newArr)
+        const arrForStorage = JSON.stringify(newArr)
+        try {
+
+            await AsyncStorage.setItem('foodArr', arrForStorage)
+
+          } catch (e) {
+            // saving error
+          }
         
     }
     randomFoodFunct =()=>{
-        const rand = Math.floor(Math.random() * foodArr.length) + 1 ;
-        setRandomFood(foodArr[rand-1].name)
+        const arrOhneCat = foodArr
+        if(selectedCategory !== 'All'){
+            const arrayMitCat = arrOhneCat.filter(food => food.category === selectedCategory)
+            console.log(arrayMitCat+"filter" + selectedCategory)
+
+            const rand = Math.floor(Math.random() * arrayMitCat.length) + 1 ;
+        setRandomFood(arrayMitCat[rand-1].name)
+        }else{
+            const rand = Math.floor(Math.random() * arrOhneCat.length) + 1 ;
+            setRandomFood(arrOhneCat[rand-1].name)
+        }
+        
 
     }
 
     eingabeAddFood=(text)=>{
         setFood(text)
     }
+    eingabeAddCategory=(text)=>{
+        setfoodCategory(text)
+    }
+
+    onDeleteClick=async(id)=>{
+        console.log(id)
+        const filteredArr = foodArr.filter(food => food.id !== id)
+        setFoodArr(filteredArr)
+        const arrForStorage = JSON.stringify(filteredArr)
+        try {        
+
+            await AsyncStorage.setItem('foodArr', arrForStorage)
+            
+          } catch (e) {
+            // saving error
+          }
+    }
+
+    localStore = async ()=>{
+        console.log("Local store add")
+        try {
+            const arr = [{ "id": "1", "name": "HAMBURGOAR",  "category":"Fast Food"}, { "id": "2", "name": "Pizza",  "category":"Fast Food"}]
+            const jsonValue = JSON.stringify(arr)
+            setFoodArr([{ "id": "2", "name": "test", "category":"test"}])
+           
+            await AsyncStorage.setItem('foodArr', jsonValue)
+            
+          } catch (e) {
+            // saving error
+          }
+    }
+
+    localStoreGet=async()=>{
+       try {
+                const jsonValue = await AsyncStorage.getItem('foodArr')
+                console.log(jsonValue)
+                const fok = JSON.parse(jsonValue)
+                fok.sort((a, b) => (a.category > b.category) ? 1 : (a.category === b.category) ? ((a.name > b.name) ? 1 : -1) : -1 )
+                console.log(jsonValue+"sorted")
+                setFoodArr(fok)
+                
+                return jsonValue != null ? JSON.parse(jsonValue) : null;
+            } catch(e) {
+                // error reading value
+
+                console.log(e)
+            }
+    }
+
+    setSelectCategry=(itemValue, itemIndex)=>{
+        
+        setSelectedCategory(itemValue)
+        
+    }
+    
 
     return (
         <NavigationContainer>
@@ -82,6 +126,7 @@ export default function Homecomp(props) {
                 activeTintColor: 'green',
                 style: {
                 backgroundColor: '#000000',
+                
                                 }}}>
                 <Tab.Screen  
                     name="Random Food"
@@ -99,6 +144,10 @@ export default function Homecomp(props) {
                                 randomFood = {randomFood}
                                 onRandomClick = {randomFoodFunct}
                                 onInsertNewFood = {insertNewFood}
+                                localStore = {localStore}
+                                localStoreGet = {localStoreGet}
+                                selectedCategory = {selectedCategory}
+                                setSelectCategry={setSelectCategry}
                             >
 
                             </RandomPage>
@@ -122,6 +171,10 @@ export default function Homecomp(props) {
                                 onRandomClick = {randomFoodFunct}
                                 onInsertNewFood = {insertNewFood}
                                 onTypeFood = {eingabeAddFood}
+                                onTypeCategory = {eingabeAddCategory}
+                                onDeleteClick = {onDeleteClick}
+                                selectedCategory = {selectedCategory}
+                                setSelectCategry={setSelectCategry}
                             >
 
                             </AddFoodPage>
@@ -132,4 +185,3 @@ export default function Homecomp(props) {
         </NavigationContainer>
     )
 }
-
