@@ -49,7 +49,7 @@ export default function Homecomp(props) {
         const arrOhneCat = foodArr
         if(selectedCategory !== 'All'){
             const arrayMitCat = arrOhneCat.filter(food => food.category === selectedCategory)
-            console.log(arrayMitCat+"filter" + selectedCategory)
+            
 
             const rand = Math.floor(Math.random() * arrayMitCat.length) + 1 ;
         setRandomFood(arrayMitCat[rand-1].name)
@@ -102,7 +102,7 @@ export default function Homecomp(props) {
                 console.log(jsonValue)
                 const fok = JSON.parse(jsonValue)
                 fok.sort((a, b) => (a.category > b.category) ? 1 : (a.category === b.category) ? ((a.name > b.name) ? 1 : -1) : -1 )
-                console.log(jsonValue+"sorted")
+                
                 setFoodArr(fok)
                 
                 return jsonValue != null ? JSON.parse(jsonValue) : null;
@@ -157,7 +157,9 @@ export default function Homecomp(props) {
                 style: {
                 backgroundColor: '#000000',
                 
-                                }}}>
+                                }}}
+                lazy={false}                
+                                >
                 <Tab.Screen  
                     name="Random Food"
                       
@@ -186,7 +188,7 @@ export default function Homecomp(props) {
                 </Tab.Screen>
                 <Tab.Screen  
                     name="Add Food"
-                 
+                    
                     options={{ 
                     tabBarIcon: ({ color, size }) => (
                     <Entypo name="add-to-list" color={color} size={size} />)

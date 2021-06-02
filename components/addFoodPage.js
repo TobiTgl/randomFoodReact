@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState, useEffect} from 'react'
-import { View, Text, Button, StyleSheet, TextInput, ScrollView } from 'react-native'
+import { View, Text, Button, StyleSheet, TextInput, ScrollView, ActivityIndicator } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
@@ -10,11 +10,17 @@ import {Picker} from '@react-native-picker/picker';
 export default function AddFoodPage(props) {
     const addTextInput = React.createRef();
     const addCategoryInput = React.createRef();
+
+    const [loading, setLoading] = useState(false)
+
+    useEffect(()=> {
+        setLoading(true)
+    }, [])
    
       
     return (
         <View style={styles.container}>
-            <View style={styles.inputContainer}>
+           <View style={styles.inputContainer}>
                 <TextInput 
                     ref={addTextInput}
                     placeholder={'Enter food here...'}

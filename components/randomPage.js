@@ -5,15 +5,18 @@ import { NavigationContainer } from '@react-navigation/native'
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
 import {Picker} from '@react-native-picker/picker';
+import ReelSet from './ReelSet'
+
 
 export default function RandomPage(props) {
-    
+    const [reelSet, setReelSet] = useState(null)
 
-   
     
     return (
         <View style={styles.container}>
+            
             <Text style={styles.textField }>{props.randomFood}</Text>
+            <ReelSet ref = {(ref) => setReelSet(ref)}></ReelSet>
             <Picker
                 style={styles.picker}
                 selectedValue={props.selectedCategory}
@@ -34,7 +37,7 @@ export default function RandomPage(props) {
                 
             </Picker>
             <View style={styles.randomButton}>
-                <Button color="green" title="random food" onPress={()=> props.onRandomClick()}></Button>                
+                <Button color="green" title="random food" onPress={()=> reelSet.spin()}></Button>                
             </View>
             <StatusBar animated={true}
                  backgroundColor="#8cff9a" 
@@ -52,11 +55,14 @@ const styles = StyleSheet.create({
     textField: {
         fontSize: 40,
         color:'white',
+        backgroundColor: 'grey',
         marginBottom:20,
-        marginTop:50
+        marginTop:50,
+        padding:50
     },
     randomButton: {
         shadowColor: "#fff",
+        backgroundColor: 'grey',
         shadowOffset: {
             width: 0,
             height: 3,
@@ -71,6 +77,7 @@ const styles = StyleSheet.create({
     }, 
     picker:{
         color: 'white',
+        backgroundColor: 'grey',
         backgroundColor: 'green',
         width: 129,
        
