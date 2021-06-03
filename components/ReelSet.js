@@ -10,11 +10,14 @@ export default class ReelSet extends Component {
     }
 
    
-
+    randomBetween = (min,max) =>{
+        return Math.floor(Math.random() * (max-min +1) +min)
+    }
    
 
     spin = ()=> {
-        this.reels[0].scrollByOffset(10)
+        console.log(this.randomBetween(5, 15))
+        this.reels[0].scrollByOffset(this.randomBetween(5, 15))
     }
 
 
