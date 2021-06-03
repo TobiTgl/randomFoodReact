@@ -7,22 +7,42 @@ export default class Reel extends Component {
     constructor(props) {
         super(props)
 
-        this.symbols= "BBCDGLGLCCCLLDDMS777XDBLBBCDGLGLCCCLLDDMS777XDBLBBCDGLGLCCCLLDDMS777XDBLBBCDGLGLCCCLLDDMS777XDBLBBCDGLGLCCCLLDDMS777XDBLBBCDGLGLCCCLLDDMS777XDBLBBCDGLGLCCCLLDDMS777XDBLBBCDGLGLCCCLLDDMS777XDBLBBCDGLGLCCCLLDDMS777XDBLBBCDGLGLCCCLLDDMS777XDBL";
-        this.textHeight = 40;
-        this.position = (this.symbols.length*40) *-1
-        this.currentScrollPos = this.position +105;
-        console.log(this.position)
-        this.state = {
-            
-    
-            scrollPos: new Animated.Value(this.currentScrollPos),
-            
+        prepSlotArr = () =>{
+            return props.foodArr.map((n) => n.id)
         }
+
+        this.foodArrForSlotPrep = prepSlotArr()
+        this.multipleArrs = []
+          
+        for (let index = 0; index < 50; index++) {
+            
+            this.foodArrForSlotPrep.map((s)=> this.multipleArrs.push(s) ) 
+        }
+
+        this.textHeight = 40;
+        this.position = (this.props.foodArr.length) - 4.5
+        this.currentScrollPos = (this.multipleArrs.length-4.5) * 40 * -1;
+        console.log(this.multipleArrs)
+        this.state = {
+                
+        
+            scrollPos: new Animated.Value(this.currentScrollPos),
+                
+        }
+    
     }
+
+    
     
 
     scrollByOffset=(offset) => {
-        this.currentScrollPos = this.currentScrollPos + (80*offset)
+        console.log("currentposition0=" + this.position)
+        console.log("currentcurrentScrollPos0=" + this.currentScrollPos)
+        this.currentScrollPos = this.currentScrollPos + (40*offset)
+        this.position = this.position - offset
+        console.log("currentposition1=" + this.position)
+        console.log("currentcurrentScrollPos1=" + this.currentScrollPos)
+        
         Animated.timing(
             this.state.scrollPos, 
             {
@@ -33,16 +53,20 @@ export default class Reel extends Component {
             }
         ).start(()=>{})
 
-        this.position = (192*40*-1) + this.position % this.symbols.length
-        this.currentScrollPos = this.position +105
+        this.position = ((10-2)*10)+ this.position
+        this.currentScrollPos = (this.multipleArrs.length - (this.multipleArrs.length - (this.currentScrollPos/40)+ (this.props.foodArr.length))) *40
+        console.log("currentposition2=" + this.position)
+        console.log("currentcurrentScrollPos2=" + this.currentScrollPos)
+        setTimeout(()=> this.state.scrollPos.setValue(this.currentScrollPos), 2100)
+        
     }
 
     render(){
         return (
             <View style={styles.container}>
                 <Animated.View style={{width:'100%', height:'100%', transform: [{translateY: this.state.scrollPos}]}}>
-                    {this.symbols.split("").map((el, idx) => {
-                    return <Symbol symbol={el} key={idx} index={idx} width={'100%'} height={this.textHeight}/>
+                    {this.multipleArrs.map((el, idx) => {
+                    return <Symbol foodArr={this.props.foodArr} multipleArrs={this.multipleArrs} symbol={el} key={idx} index={idx} width={'100%'} height={this.textHeight}/>
                     })}
                 </Animated.View>
             </View>

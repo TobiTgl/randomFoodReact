@@ -7,6 +7,8 @@ export default function Symbol(props) {
 
     useEffect(()=> {getText()}, [])
 
+    
+
     /*getText = () => {
         switch (props.symbol){
             case "B":
@@ -44,42 +46,30 @@ export default function Symbol(props) {
 
         }
     }*/
-    getText = () => {
-        switch (props.symbol){
-            case "B":
-                return "Burger"
-                break;
-            case "C":
-                return "Chips"
-                break;
-            case "X":
-                return "Xylophon"
-                break;
-            case "D":
-                return "Deine Mum"
-                break;
-            case "L":
-                return "Lol"
-                break;
-            case "M":
-                return "Melone"
-                break;
-            case "O":
-                return "Orange"
-                break;
-            case "P":
-                return "Pflaume"
-                break;
-             case "7":
-                return "Nummer 7"
-                break;
-            case "S":
-                return "Spätzle"
-                break;
-            default:
-                return "Random Food"
 
+
+    getText = () => {
+
+        for (let index = 0; index < props.multipleArrs.length; index++) {
+            
+            const arrIndex = props.foodArr.findIndex((s) => s.id == props.symbol)
+           
+            
+
+            switch (props.symbol){
+                case props.foodArr[arrIndex].id:
+                    return props.foodArr[arrIndex].name
+                    break;
+                case props.foodArr[index].id:
+                    return props.foodArr[index].name
+                    break;
+                default:
+                    return "Random Food"
+            }
+            
         }
+
+       
     }
     let text = getText()
 

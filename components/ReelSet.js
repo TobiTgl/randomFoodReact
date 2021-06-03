@@ -7,6 +7,9 @@ export default class ReelSet extends Component {
     constructor(props) {
         super(props)
         this.reels=[]
+
+       
+     
     }
 
    
@@ -16,14 +19,15 @@ export default class ReelSet extends Component {
    
 
     spin = ()=> {
-        console.log(this.randomBetween(5, 15))
-        this.reels[0].scrollByOffset(this.randomBetween(5, 15))
+        console.log(this.randomBetween(50, 200))
+     
+        this.reels[0].scrollByOffset(this.randomBetween(20, 50))
     }
 
 
     renderReels =()=>{
         let reelList = Array.apply(null, Array(1)).map((el, idx) => {
-            return <Reel width={'90%'}  key={idx} index={idx} ref= {(ref) => {this.reels[idx] = ref}}></Reel>
+            return <Reel buttonSet={this.props.buttonSet} foodArr={this.props.foodArr} width={'90%'}  key={idx} index={idx} ref= {(ref) => {this.reels[idx] = ref}} selectedCategory = {this.props.selectedCategory}></Reel>
         })
 
         return(
@@ -50,7 +54,7 @@ export default class ReelSet extends Component {
 const styles = StyleSheet.create({
     container: {
        
-        height: 90,
+        height: 160,
         width: '90%',
         backgroundColor: 'green',
         alignItems: 'center',

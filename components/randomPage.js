@@ -10,13 +10,20 @@ import ReelSet from './ReelSet'
 
 export default function RandomPage(props) {
     const [reelSet, setReelSet] = useState(null)
+    const [disableButton, setdisableButton] = useState(false)
+    console.log("randompage" + props.foodArr)
 
+    buttonSet=()=>{
+        console.log("komme ich an?")
+        setdisableButton(true)
+        setTimeout(()=> setdisableButton(false), 2100)
+    }
     
     return (
         <View style={styles.container}>
             
             <Text style={styles.textField }>{props.randomFood}</Text>
-            <ReelSet ref = {(ref) => setReelSet(ref)}></ReelSet>
+            <ReelSet ref = {(ref) => setReelSet(ref)} foodArr={props.foodArr} buttonSet={buttonSet} selectedCategory = {props.selectedCategory}></ReelSet>
             <Picker
                 style={styles.picker}
                 selectedValue={props.selectedCategory}
@@ -37,7 +44,7 @@ export default function RandomPage(props) {
                 
             </Picker>
             <View style={styles.randomButton}>
-                <Button color="green" title="random food" onPress={()=> reelSet.spin()}></Button>                
+                <Button color="green" title="random food" onPress={()=> {reelSet.spin()}} disabled={disableButton} ></Button>                
             </View>
             <StatusBar animated={true}
                  backgroundColor="#8cff9a" 

@@ -22,6 +22,10 @@ export default function Homecomp(props) {
     const [selectedCategoryList, setSelectedCategoryList] = useState('All');
     
     useEffect(()=>{localStoreGet()}, [])
+    function useForceUpdate(){
+        const [value, setValue] = useState(0); // integer state
+        return () => setValue(value => value + 1); // update the state to force render
+    }
 
     const Tab = createBottomTabNavigator();
 
@@ -66,6 +70,12 @@ export default function Homecomp(props) {
     }
     eingabeAddCategory=(text)=>{
         setfoodCategory(text)
+        if(selectedCategory !== 'All'){
+            const arrayMitCat = foodArr.filter(food => food.category === selectedCategory)
+            
+            console.log(arrayMitCat)
+        }
+        const forceUpdate = useForceUpdate();
     }
 
     onDeleteClick=async(id)=>{
@@ -117,6 +127,7 @@ export default function Homecomp(props) {
         
         setSelectedCategory(itemValue)
         
+        
     }
     setSelectCategryList=async(itemValue, itemIndex)=>{
         
@@ -158,7 +169,7 @@ export default function Homecomp(props) {
                 backgroundColor: '#000000',
                 
                                 }}}
-                lazy={false}                
+            lazy={false}                
                                 >
                 <Tab.Screen  
                     name="Random Food"
