@@ -84,9 +84,8 @@ export default function Symbol(props) {
 const styles = StyleSheet.create({
     container: {
         height: 40,
-        borderWidth: 1,        
-        borderColor: 'white',
-        backgroundColor: 'grey',
+        
+        backgroundColor: 'black',
         alignItems: 'center',
         justifyContent: 'center',
     }

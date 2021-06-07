@@ -33,7 +33,6 @@ export default function Homecomp(props) {
         const foodName = food
         const id = uuidv4()
         const category = foodCategory
-        console.log(id)
         let newArr = [...foodArr]
     
         newArr.push({id: id, name: foodName, category: foodCategory})
@@ -53,8 +52,6 @@ export default function Homecomp(props) {
         const arrOhneCat = foodArr
         if(selectedCategory !== 'All'){
             const arrayMitCat = arrOhneCat.filter(food => food.category === selectedCategory)
-            
-
             const rand = Math.floor(Math.random() * arrayMitCat.length) + 1 ;
         setRandomFood(arrayMitCat[rand-1].name)
         }else{
@@ -72,14 +69,12 @@ export default function Homecomp(props) {
         setfoodCategory(text)
         if(selectedCategory !== 'All'){
             const arrayMitCat = foodArr.filter(food => food.category === selectedCategory)
-            
-            console.log(arrayMitCat)
         }
-        const forceUpdate = useForceUpdate();
+        
+        //const forceUpdate = useForceUpdate();
     }
 
     onDeleteClick=async(id)=>{
-        console.log(id)
         const filteredArr = foodArr.filter(food => food.id !== id)
         setFoodArr(filteredArr)
         const arrForStorage = JSON.stringify(filteredArr)
@@ -109,7 +104,6 @@ export default function Homecomp(props) {
     localStoreGet=async()=>{
        try {
                 const jsonValue = await AsyncStorage.getItem('foodArr')
-                console.log(jsonValue)
                 const fok = JSON.parse(jsonValue)
                 fok.sort((a, b) => (a.category > b.category) ? 1 : (a.category === b.category) ? ((a.name > b.name) ? 1 : -1) : -1 )
                 

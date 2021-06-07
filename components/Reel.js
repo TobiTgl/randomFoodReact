@@ -14,15 +14,14 @@ export default class Reel extends Component {
         this.foodArrForSlotPrep = prepSlotArr()
         this.multipleArrs = []
           
-        for (let index = 0; index < 50; index++) {
+        for (let index = 0; index <5; index++) {
             
             this.foodArrForSlotPrep.map((s)=> this.multipleArrs.push(s) ) 
         }
 
         this.textHeight = 40;
         this.position = (this.props.foodArr.length) - 4.5
-        this.currentScrollPos = (this.multipleArrs.length-4.5) * 40 * -1;
-        console.log(this.multipleArrs)
+        this.currentScrollPos = (this.multipleArrs.length-13.5) * 40 * -1;
         this.state = {
                 
         
@@ -31,9 +30,6 @@ export default class Reel extends Component {
         }
     
     }
-
-    
-    
 
     scrollByOffset=(offset) => {
         console.log("currentposition0=" + this.position)
@@ -79,7 +75,10 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         height: '100%',
         width: '100%',
-        backgroundColor: 'lightblue',
+        borderWidth: 0,     
+        marginLeft: 0,   
+        borderColor: 'black',
+        backgroundColor: 'black',
         alignItems: 'center',
         justifyContent: 'center',
     },

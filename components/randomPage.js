@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState, useEffect} from 'react'
-import { View, Text, Button, StyleSheet, TextInput } from 'react-native'
+import { View, Text, Button, StyleSheet, TextInput, Image } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
@@ -11,19 +11,31 @@ import ReelSet from './ReelSet'
 export default function RandomPage(props) {
     const [reelSet, setReelSet] = useState(null)
     const [disableButton, setdisableButton] = useState(false)
-    console.log("randompage" + props.foodArr)
-
-    buttonSet=()=>{
-        console.log("komme ich an?")
+  
+    buttonSet=()=>{    
         setdisableButton(true)
         setTimeout(()=> setdisableButton(false), 2100)
     }
-    
+    //            <Text style={styles.textField }>{props.randomFood}</Text>
     return (
         <View style={styles.container}>
             
-            <Text style={styles.textField }>{props.randomFood}</Text>
-            <ReelSet ref = {(ref) => setReelSet(ref)} foodArr={props.foodArr} buttonSet={buttonSet} selectedCategory = {props.selectedCategory}></ReelSet>
+            <View style={styles.picContainer}>
+                <Image
+                    style={styles.pic}
+                    source={require('../assets/dreieck.png')}
+                 />
+
+                <ReelSet style={styles.reelSet} ref = {(ref) => setReelSet(ref)} foodArr={props.foodArr} buttonSet={buttonSet} selectedCategory = {props.selectedCategory}></ReelSet>
+            </View>
+            <Image
+                style={styles.pic2}
+                source={require('../assets/linie.png')}
+            />
+            <Image
+                style={styles.pic2}
+                source={require('../assets/slotmachine.png')}
+            />
             <Picker
                 style={styles.picker}
                 selectedValue={props.selectedCategory}
@@ -44,7 +56,7 @@ export default function RandomPage(props) {
                 
             </Picker>
             <View style={styles.randomButton}>
-                <Button color="green" title="random food" onPress={()=> {reelSet.spin()}} disabled={disableButton} ></Button>                
+                <Button color="green" title="Spin!" onPress={()=> {buttonSet(); reelSet.spin()}} disabled={disableButton} ></Button>                
             </View>
             <StatusBar animated={true}
                  backgroundColor="#8cff9a" 
@@ -59,6 +71,9 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
     },
+    reelSet: {
+       
+    },
     textField: {
         fontSize: 40,
         color:'white',
@@ -69,7 +84,7 @@ const styles = StyleSheet.create({
     },
     randomButton: {
         shadowColor: "#fff",
-        backgroundColor: 'grey',
+        backgroundColor: 'black',
         shadowOffset: {
             width: 0,
             height: 3,
@@ -78,9 +93,10 @@ const styles = StyleSheet.create({
         shadowRadius: 4.65,
 
         elevation: 7,
-       
+        marginBottom:-605,
         color:'white',
-        marginBottom:20
+       
+        padding:20
     }, 
     picker:{
         color: 'white',
@@ -89,8 +105,26 @@ const styles = StyleSheet.create({
         width: 129,
        
         fontSize: 12,
-        marginBottom:20,
+       
+        marginTop:-200,
         height: 50
 
-    }
+    },
+    pic: {
+        height: '10%',
+        width: '10%',
+        marginTop:73
+     },
+     pic2: {
+        height: '80%',
+        width: '100%',
+        marginTop:-590
+     },
+     picContainer: {
+        
+        borderWidth: 1,
+        borderColor: 'white',
+        position: 'absolute',
+        flexDirection: "row",
+     }
   });
