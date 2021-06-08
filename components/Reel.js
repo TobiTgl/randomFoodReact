@@ -7,30 +7,28 @@ export default class Reel extends Component {
     constructor(props) {
         super(props)
 
-        prepSlotArr = () =>{
+        /*prepSlotArr = () =>{
             return props.foodArr.map((n) => n.id)
-        }
+        }*/
 
-        this.foodArrForSlotPrep = prepSlotArr()
-        this.multipleArrs = []
+        //this.foodArrForSlotPrep = prepSlotArr()
+        //this.multipleArrs = []
           
-        for (let index = 0; index <5; index++) {
+       /* for (let index = 0; index <5; index++) {
             
             this.foodArrForSlotPrep.map((s)=> this.multipleArrs.push(s) ) 
         }
-
+        */
         this.textHeight = 40;
         this.position = (this.props.foodArr.length) - 4.5
-        this.currentScrollPos = (this.multipleArrs.length-13.5) * 40 * -1;
+        this.currentScrollPos = (this.props.multipleArrs.length-17.5) * 40 * -1;
         this.state = {
-                
-        
-            scrollPos: new Animated.Value(this.currentScrollPos),
-                
+            scrollPos: new Animated.Value(this.currentScrollPos),  
         }
     
     }
 
+    
     scrollByOffset=(offset) => {
         console.log("currentposition0=" + this.position)
         console.log("currentcurrentScrollPos0=" + this.currentScrollPos)
@@ -50,7 +48,7 @@ export default class Reel extends Component {
         ).start(()=>{})
 
         this.position = ((10-2)*10)+ this.position
-        this.currentScrollPos = (this.multipleArrs.length - (this.multipleArrs.length - (this.currentScrollPos/40)+ (this.props.foodArr.length))) *40
+        this.currentScrollPos = (this.props.multipleArrs.length - (this.props.multipleArrs.length - (this.currentScrollPos/40)+ (this.props.foodArr.length))) *40
         console.log("currentposition2=" + this.position)
         console.log("currentcurrentScrollPos2=" + this.currentScrollPos)
         setTimeout(()=> this.state.scrollPos.setValue(this.currentScrollPos), 2100)
@@ -61,8 +59,8 @@ export default class Reel extends Component {
         return (
             <View style={styles.container}>
                 <Animated.View style={{width:'100%', height:'100%', transform: [{translateY: this.state.scrollPos}]}}>
-                    {this.multipleArrs.map((el, idx) => {
-                    return <Symbol foodArr={this.props.foodArr} multipleArrs={this.multipleArrs} symbol={el} key={idx} index={idx} width={'100%'} height={this.textHeight}/>
+                    {this.props.multipleArrs.map((el, idx) => {
+                    return <Symbol foodArr={this.props.foodArr} multipleArrs={this.props.multipleArrs} symbol={el} key={idx} index={idx} width={'100%'} height={this.textHeight}/>
                     })}
                 </Animated.View>
             </View>

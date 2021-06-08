@@ -25,7 +25,7 @@ export default class ReelSet extends Component {
 
     renderReels =()=>{
         let reelList = Array.apply(null, Array(1)).map((el, idx) => {
-            return <Reel buttonSet={this.props.buttonSet} foodArr={this.props.foodArr} width={'90%'}  key={idx} index={idx} ref= {(ref) => {this.reels[idx] = ref}} selectedCategory = {this.props.selectedCategory}></Reel>
+            return <Reel buttonSet={this.props.buttonSet} multipleArrs = {this.props.multipleArrs} foodArr={this.props.foodArr} width={'90%'}  key={idx} index={idx} ref= {(ref) => {this.reels[idx] = ref}} selectedCategory = {this.props.selectedCategory}></Reel>
         })
 
         return(

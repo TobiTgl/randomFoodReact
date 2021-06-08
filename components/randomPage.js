@@ -11,7 +11,7 @@ import ReelSet from './ReelSet'
 export default function RandomPage(props) {
     const [reelSet, setReelSet] = useState(null)
     const [disableButton, setdisableButton] = useState(false)
-  
+    
     buttonSet=()=>{    
         setdisableButton(true)
         setTimeout(()=> setdisableButton(false), 2100)
@@ -26,7 +26,7 @@ export default function RandomPage(props) {
                     source={require('../assets/dreieck.png')}
                  />
 
-                <ReelSet style={styles.reelSet} ref = {(ref) => setReelSet(ref)} foodArr={props.foodArr} buttonSet={buttonSet} selectedCategory = {props.selectedCategory}></ReelSet>
+                <ReelSet style={styles.reelSet} ref = {(ref) => setReelSet(ref)} key={props.multipleArrs} multipleArrs = {props.multipleArrs} foodArr={props.foodArr} buttonSet={buttonSet} selectedCategory = {props.selectedCategory}></ReelSet>
             </View>
             <Image
                 style={styles.pic2}
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.29,
         shadowRadius: 4.65,
-
+        
         elevation: 7,
         marginBottom:-605,
         color:'white',

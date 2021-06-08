@@ -20,14 +20,35 @@ export default function Homecomp(props) {
     const [foodArr, setFoodArr] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [selectedCategoryList, setSelectedCategoryList] = useState('All');
+    const [multipleArrs, setSmultipleArrs] = useState([]);
+   
     
     useEffect(()=>{localStoreGet()}, [])
+    //useEffect(()=>{slotArrPrep()}, [])
     function useForceUpdate(){
         const [value, setValue] = useState(0); // integer state
         return () => setValue(value => value + 1); // update the state to force render
     }
 
     const Tab = createBottomTabNavigator();
+
+    slotArrPrep=()=>{
+        
+         
+            let arrprep = foodArr.map((n) => n.id)
+            
+            let multipleArrss = []
+
+            for (let index = 0; index <5; index++) {
+            
+                arrprep.map((s)=> multipleArrss.push(s) ) 
+            }
+            setSmultipleArrs(multipleArrss)
+    
+          
+      
+       
+    }
 
     insertNewFood=async()=>{
         const foodName = food
@@ -78,9 +99,11 @@ export default function Homecomp(props) {
         const filteredArr = foodArr.filter(food => food.id !== id)
         setFoodArr(filteredArr)
         const arrForStorage = JSON.stringify(filteredArr)
+        console.log("vor delete")
         try {        
 
             await AsyncStorage.setItem('foodArr', arrForStorage)
+            localStoreGet()
             
           } catch (e) {
             // saving error
@@ -108,7 +131,7 @@ export default function Homecomp(props) {
                 fok.sort((a, b) => (a.category > b.category) ? 1 : (a.category === b.category) ? ((a.name > b.name) ? 1 : -1) : -1 )
                 
                 setFoodArr(fok)
-                
+                slotArrPrep()
                 return jsonValue != null ? JSON.parse(jsonValue) : null;
             } catch(e) {
                 // error reading value
@@ -176,8 +199,10 @@ export default function Homecomp(props) {
                         props=> 
                             <RandomPage
                                 {...props}
+                                multipleArrs = {multipleArrs}
                                 foodArr={foodArr}
                                 food = {food}
+                                key={multipleArrs}
                                 randomFood = {randomFood}
                                 onRandomClick = {randomFoodFunct}
                                 onInsertNewFood = {insertNewFood}
