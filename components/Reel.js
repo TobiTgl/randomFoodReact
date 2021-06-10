@@ -21,7 +21,7 @@ export default class Reel extends Component {
         */
         this.textHeight = 40;
         this.position = (this.props.foodArr.length) - 4.5
-        this.currentScrollPos = (this.props.multipleArrs.length-17.5) * 40 * -1;
+        this.currentScrollPos = (this.props.multipleArrs.length-13.5) * 40 * -1;
         this.state = {
             scrollPos: new Animated.Value(this.currentScrollPos),  
         }

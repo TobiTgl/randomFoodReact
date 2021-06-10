@@ -54,8 +54,8 @@ export default function Symbol(props) {
             
             const arrIndex = props.foodArr.findIndex((s) => s.id == props.symbol)
            
-            
-
+            try{
+            if (props.foodArr[arrIndex].id != undefined){
             switch (props.symbol){
                 case props.foodArr[arrIndex].id:
                     return props.foodArr[arrIndex].name
@@ -66,7 +66,10 @@ export default function Symbol(props) {
                 default:
                     return "Random Food"
             }
-            
+            }
+        }catch (e) {
+            //console.log(e)
+        }
         }
 
        
@@ -76,7 +79,7 @@ export default function Symbol(props) {
     return (
         
         <View style={styles.container}>
-            <Text style={{fontSize:40, color:'white'}}>{text}</Text>
+            <Text style={{fontSize:40, color:'white'}} key={text}>{text}</Text>
         </View>
     )
 }

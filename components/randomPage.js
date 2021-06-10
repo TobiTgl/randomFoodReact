@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState, useEffect} from 'react'
-import { View, Text, Button, StyleSheet, TextInput, Image } from 'react-native'
+import { View, Text, Button, StyleSheet, TextInput, Image, TouchableOpacity } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
@@ -55,11 +55,15 @@ export default function RandomPage(props) {
                 
                 
             </Picker>
-            <View style={styles.randomButton}>
-                <Button color="green" title="Spin!" onPress={()=> {buttonSet(); reelSet.spin()}} disabled={disableButton} ></Button>                
+            <TouchableOpacity style={styles.randomButton} onPress={()=> {buttonSet(); reelSet.spin()}} disabled={disableButton}>
+            <View style={styles.inner} >
+                <Text style={({color:'white'})}>SPIN!</Text>            
             </View>
-            <StatusBar animated={true}
-                 backgroundColor="#8cff9a" 
+            </TouchableOpacity>
+            <StatusBar 
+                style="light"
+                backgroundColor="black"
+                 
              />
         </View>
     )
@@ -83,21 +87,27 @@ const styles = StyleSheet.create({
         padding:50
     },
     randomButton: {
-        shadowColor: "#fff",
-        backgroundColor: 'black',
-        shadowOffset: {
-            width: 0,
-            height: 3,
-        },
-        shadowOpacity: 0.29,
-        shadowRadius: 4.65,
-        
-        elevation: 7,
-        marginBottom:-605,
+        backgroundColor:"green",
+        borderRadius: 100,
+        height:100,
+        width:100, 
+        marginBottom:-630,
         color:'white',
-       
-        padding:20
+        padding:20,
+        justifyContent: 'center',
+        alignItems: 'center',
     }, 
+    inner: {
+        height: "150%",
+        borderRadius: 100,
+        width:'150%',
+        borderWidth:1,
+        borderColor:"darkgreen",
+        elevation:50,
+        backgroundColor: "green",
+        alignItems: "center",
+        justifyContent: "center",
+      },
     picker:{
         color: 'white',
         backgroundColor: 'grey',

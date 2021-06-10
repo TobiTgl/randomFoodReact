@@ -39,7 +39,7 @@ export default function Homecomp(props) {
             
             let multipleArrss = []
 
-            for (let index = 0; index <5; index++) {
+            for (let index = 0; index <8; index++) {
             
                 arrprep.map((s)=> multipleArrss.push(s) ) 
             }
@@ -63,7 +63,7 @@ export default function Homecomp(props) {
         try {
 
             await AsyncStorage.setItem('foodArr', arrForStorage)
-
+            localStoreGet()
           } catch (e) {
             // saving error
           }
@@ -99,10 +99,12 @@ export default function Homecomp(props) {
         const filteredArr = foodArr.filter(food => food.id !== id)
         setFoodArr(filteredArr)
         const arrForStorage = JSON.stringify(filteredArr)
+        debugger;
         console.log("vor delete")
         try {        
 
             await AsyncStorage.setItem('foodArr', arrForStorage)
+            debugger;
             localStoreGet()
             
           } catch (e) {
@@ -129,7 +131,7 @@ export default function Homecomp(props) {
                 const jsonValue = await AsyncStorage.getItem('foodArr')
                 const fok = JSON.parse(jsonValue)
                 fok.sort((a, b) => (a.category > b.category) ? 1 : (a.category === b.category) ? ((a.name > b.name) ? 1 : -1) : -1 )
-                
+                console.log("get stuff")
                 setFoodArr(fok)
                 slotArrPrep()
                 return jsonValue != null ? JSON.parse(jsonValue) : null;
@@ -229,6 +231,7 @@ export default function Homecomp(props) {
                                 {...props}
                                 foodArr={foodArr}
                                 food = {food}
+                                key={multipleArrs}
                                 randomFood = {randomFood}
                                 onRandomClick = {randomFoodFunct}
                                 onInsertNewFood = {insertNewFood}
