@@ -39,7 +39,7 @@ export default function Homecomp(props) {
             
             let multipleArrss = []
 
-            for (let index = 0; index <8; index++) {
+            for (let index = 0; index <5; index++) {
             
                 arrprep.map((s)=> multipleArrss.push(s) ) 
             }

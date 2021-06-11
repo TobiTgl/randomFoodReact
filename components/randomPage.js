@@ -19,7 +19,9 @@ export default function RandomPage(props) {
     //            <Text style={styles.textField }>{props.randomFood}</Text>
     return (
         <View style={styles.container}>
-            
+            <View style={styles.slotContainer}>
+                
+            </View>
             <View style={styles.picContainer}>
                 <Image
                     style={styles.pic}
@@ -29,13 +31,10 @@ export default function RandomPage(props) {
                 <ReelSet style={styles.reelSet} ref = {(ref) => setReelSet(ref)} key={props.multipleArrs} multipleArrs = {props.multipleArrs} foodArr={props.foodArr} buttonSet={buttonSet} selectedCategory = {props.selectedCategory}></ReelSet>
             </View>
             <Image
-                style={styles.pic2}
-                source={require('../assets/linie.png')}
-            />
-            <Image
-                style={styles.pic2}
-                source={require('../assets/slotmachine.png')}
-            />
+                    style={styles.pic2}
+                    source={require('../assets/fullslot.png')}
+                />
+            <View style={styles.pickerContainer}>
             <Picker
                 style={styles.picker}
                 selectedValue={props.selectedCategory}
@@ -55,11 +54,14 @@ export default function RandomPage(props) {
                 
                 
             </Picker>
-            <TouchableOpacity style={styles.randomButton} onPress={()=> {buttonSet(); reelSet.spin()}} disabled={disableButton}>
-            <View style={styles.inner} >
-                <Text style={({color:'white'})}>SPIN!</Text>            
             </View>
-            </TouchableOpacity>
+            <View style={styles.buttonContainer}>
+                <TouchableOpacity style={styles.randomButton} onPress={()=> {buttonSet(); reelSet.spin()}} disabled={disableButton}>
+                    <View style={styles.inner} >
+                        <Text style={({color:'white'})}>SPIN!</Text>            
+                    </View>
+                </TouchableOpacity>
+            </View>
             <StatusBar 
                 style="light"
                 backgroundColor="black"
@@ -75,23 +77,22 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
     },
-    reelSet: {
+    slotContainer: {
+        
+        
+    }, 
+    buttonContainer: {
        
-    },
-    textField: {
-        fontSize: 40,
-        color:'white',
-        backgroundColor: 'grey',
-        marginBottom:20,
-        marginTop:50,
-        padding:50
-    },
+    }, 
+    picContainer: {
+       
+    }, 
     randomButton: {
         backgroundColor:"green",
         borderRadius: 100,
         height:100,
         width:100, 
-        marginBottom:-630,
+        //marginBottom:-630,
         color:'white',
         padding:20,
         justifyContent: 'center',
@@ -116,25 +117,29 @@ const styles = StyleSheet.create({
        
         fontSize: 12,
        
-        marginTop:-200,
+        //marginTop:-200,
         height: 50
 
     },
     pic: {
         height: '10%',
         width: '10%',
-        marginTop:73
+       
      },
      pic2: {
-        height: '80%',
+        
+        height: '100%',
         width: '100%',
-        marginTop:-590
+        position: 'absolute',
+        //marginTop:-590
      },
      picContainer: {
-        
-        borderWidth: 1,
-        borderColor: 'white',
-        position: 'absolute',
+        marginTop: 100,
+        //borderWidth: 1,
+        //borderColor: 'white',
+        //position: 'absolute',
+        justifyContent: 'center',
+        alignItems: 'center',
         flexDirection: "row",
      }
   });
