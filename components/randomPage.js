@@ -17,16 +17,14 @@ export default function RandomPage(props) {
         setTimeout(()=> setdisableButton(false), 2100)
     }
     //            <Text style={styles.textField }>{props.randomFood}</Text>
+    //<Image style={styles.pic} source={require('../assets/dreieck.png')} />
     return (
         <View style={styles.container}>
             <View style={styles.slotContainer}>
                 
             </View>
             <View style={styles.picContainer}>
-                <Image
-                    style={styles.pic}
-                    source={require('../assets/dreieck.png')}
-                 />
+                
 
                 <ReelSet style={styles.reelSet} ref = {(ref) => setReelSet(ref)} key={props.multipleArrs} multipleArrs = {props.multipleArrs} foodArr={props.foodArr} buttonSet={buttonSet} selectedCategory = {props.selectedCategory}></ReelSet>
             </View>

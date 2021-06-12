@@ -6,6 +6,8 @@ import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
 import FoodListElement from './FoodListElement'
 import {Picker} from '@react-native-picker/picker';
+import AwesomeButton from "react-native-really-awesome-button";
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function AddFoodPage(props) {
     const addTextInput = React.createRef();
@@ -41,6 +43,18 @@ export default function AddFoodPage(props) {
                     >
                 
                 </TextInput>
+                <AwesomeButton 
+                    stretch
+                    onPress={()=>{ props.onInsertNewFood(); addTextInput.current.clear(); addCategoryInput.current.clear()}}
+                    ExtraContent={
+                        <LinearGradient
+                            colors={["green", "green", "green", "green"]}
+                            style={styles.gradient}/>
+                    }
+                    
+                >
+                        Add New Food
+                </AwesomeButton>
                 <Button color="green" title="Add new food" onPress={()=>{ props.onInsertNewFood(); addTextInput.current.clear(); addCategoryInput.current.clear()}}></Button>
             </View>
             <View style={styles.headingContainer}>
@@ -118,5 +132,8 @@ const styles = StyleSheet.create({
         marginBottom:0,
         height: 25
 
-    }
+    },
+    gradient: {
+        ...StyleSheet.absoluteFillObject
+      }
   });
