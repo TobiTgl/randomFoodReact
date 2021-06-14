@@ -12,7 +12,7 @@ export default function FoodListElement(props) {
             <View style={styles.category}>
                 <Text style={{color:'white'} }>{props.foodEle.category}</Text>
             </View>
-            <TouchableHighlight onPress={()=> props.onDeleteClick(props.id)}>
+            <TouchableHighlight onPress={()=> {props.onDeleteClick(props.id); props.startLoading()}}>
                 <View style={styles.cross} >
                     <Entypo name="circle-with-cross" size={24} color="white" />
                 </View>

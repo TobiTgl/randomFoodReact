@@ -33,25 +33,8 @@ export default function RandomPage(props) {
                     source={require('../assets/fullslot.png')}
                 />
             <View style={styles.pickerContainer}>
-            <Picker
-                style={styles.picker}
-                selectedValue={props.selectedCategory}
-                onValueChange={(itemValue, itemIndex) =>
-                    props.setSelectCategry(itemValue, itemIndex)
-                  }
-                >
-                <Picker.Item label="Select Category" value="All" />
-                <Picker.Item label="Dessert" value="Dessert" />
-                <Picker.Item label="Fast Food" value="Fast Food" />
-                <Picker.Item label="Fleischig" value="Fleischig" />
-                <Picker.Item label="Pasta" value="Pasta" />
-                <Picker.Item label="Reis" value="Reis" />
-                <Picker.Item label="Vegetarisch" value="Vegetarisch" />
-                <Picker.Item label="Sonstiges" value="Sonstiges" />
-            
-                
-                
-            </Picker>
+            <Text style={styles.picker}></Text>
+     
             </View>
             <View style={styles.buttonContainer}>
                 <TouchableOpacity style={styles.randomButton} onPress={()=> {buttonSet(); reelSet.spin()}} disabled={disableButton}>
@@ -108,9 +91,8 @@ const styles = StyleSheet.create({
         justifyContent: "center",
       },
     picker:{
-        color: 'white',
-        backgroundColor: 'grey',
-        backgroundColor: 'green',
+        color: 'black',
+     
         width: 129,
        
         fontSize: 12,

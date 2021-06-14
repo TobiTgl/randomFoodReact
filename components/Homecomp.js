@@ -22,7 +22,7 @@ export default function Homecomp(props) {
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [selectedCategoryList, setSelectedCategoryList] = useState('All');
     const [multipleArrs, setSmultipleArrs] = useState([]);
-   
+    
     
     useEffect(()=>{localStoreGet()}, [])
     //useEffect(()=>{slotArrPrep()}, [])
@@ -65,7 +65,8 @@ export default function Homecomp(props) {
 
             await AsyncStorage.setItem('foodArr', arrForStorage)
             localStoreGet()
-            alert("Succesfully added " + foodName + "!");
+            startLoading()
+            //alert("Succesfully added " + foodName + "!");
           } catch (e) {
             // saving error
           }
@@ -111,7 +112,8 @@ export default function Homecomp(props) {
             await AsyncStorage.setItem('foodArr', arrForStorage)
             debugger;
             localStoreGet()
-            alert("Succesfully deleted " + delName + "!");
+            startLoading()
+            //alert("Succesfully deleted " + delName + "!");
             
           } catch (e) {
             // saving error
@@ -151,6 +153,8 @@ export default function Homecomp(props) {
     setSelectCategry=(itemValue, itemIndex)=>{
         
         setSelectedCategory(itemValue)
+        
+        
         
         
     }
