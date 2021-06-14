@@ -47,12 +47,22 @@ export default class Reel extends Component {
             }
         ).start(()=>{})
 
-        this.position = ((10-2)*10)+ this.position
-        this.currentScrollPos = (this.props.multipleArrs.length - (this.props.multipleArrs.length - (this.currentScrollPos/40)+ (this.props.foodArr.length))) *40
-        console.log("currentposition2=" + this.position)
-        console.log("currentcurrentScrollPos2=" + this.currentScrollPos)
-        setTimeout(()=> this.state.scrollPos.setValue(this.currentScrollPos), 2100)
+        if( (((this.props.multipleArrs.length - (this.props.multipleArrs.length - (this.currentScrollPos/40)+ (this.props.foodArr.length))) *40) < (this.props.multipleArrs.length-13.5) * 40 * -1)){
         
+            this.position = ((10-2)*10)+ this.position
+            this.currentScrollPos = (this.props.multipleArrs.length - (this.props.multipleArrs.length - (this.currentScrollPos/40))) *40
+        setTimeout(()=> this.state.scrollPos.setValue(this.currentScrollPos), 2100)
+        }else if ((((this.props.multipleArrs.length - (this.props.multipleArrs.length - (this.currentScrollPos/40)+ (this.props.foodArr.length))) *40) > 0)){
+            
+            this.position = ((10-2)*10)+ this.position
+            this.currentScrollPos = (this.props.multipleArrs.length-13.5) * 40 * -1;
+            setTimeout(()=> this.state.scrollPos.setValue(this.currentScrollPos), 2100)
+        }else{
+            
+            this.position = ((10-2)*10)+ this.position
+            this.currentScrollPos = (this.props.multipleArrs.length - (this.props.multipleArrs.length - (this.currentScrollPos/40)+ (this.props.foodArr.length))) *40
+            setTimeout(()=> this.state.scrollPos.setValue(this.currentScrollPos), 2100)
+        }
     }
 
     render(){

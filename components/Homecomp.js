@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState, useEffect, useCallback} from 'react'
-import { View, Text, Button, StyleSheet, TextInput } from 'react-native'
+import { View, Text, Button, StyleSheet, TextInput, Modal } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import 'react-native-get-random-values';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
@@ -65,6 +65,7 @@ export default function Homecomp(props) {
 
             await AsyncStorage.setItem('foodArr', arrForStorage)
             localStoreGet()
+            alert("Succesfully added " + foodName + "!");
           } catch (e) {
             // saving error
           }
@@ -98,6 +99,9 @@ export default function Homecomp(props) {
 
     onDeleteClick=async(id)=>{
         const filteredArr = foodArr.filter(food => food.id !== id)
+        const delitem = foodArr.filter(food => food.id === id)
+        const delName = delitem[0].name
+        console.log(delName)
         setFoodArr(filteredArr)
         const arrForStorage = JSON.stringify(filteredArr)
         debugger;
@@ -107,6 +111,7 @@ export default function Homecomp(props) {
             await AsyncStorage.setItem('foodArr', arrForStorage)
             debugger;
             localStoreGet()
+            alert("Succesfully deleted " + delName + "!");
             
           } catch (e) {
             // saving error

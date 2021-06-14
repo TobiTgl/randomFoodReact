@@ -17,6 +17,7 @@ export default function App() {
         await SplashScreen.preventAutoHideAsync();
         // Pre-load fonts, make any API calls you need to do here
         await Font.loadAsync(Entypo.font);
+        console.log('load stuff')
         // Artificially delay for two seconds to simulate a slow loading
         // experience. Please remove this if you copy and paste the code!
         await new Promise(resolve => setTimeout(resolve, 2000));
@@ -25,6 +26,7 @@ export default function App() {
       } finally {
         // Tell the application to render
         setAppIsReady(true);
+        console.log(appIsReady)
       }
     }
 
@@ -33,6 +35,7 @@ export default function App() {
 
   const onLayoutRootView = useCallback(async () => {
     if (appIsReady) {
+      console.log("ready?")
       // This tells the splash screen to hide immediately! If we call this after
       // `setAppIsReady`, then we may see a blank screen while the app is
       // loading its initial state and rendering its first pixels. So instead,
@@ -48,9 +51,14 @@ export default function App() {
   }
   
   return (
-    <>
-    <Homecomp></Homecomp>
-    </>
+    
+    <View
+    style={{ flex: 1}}
+      onLayout={onLayoutRootView}>
+    
+      <Homecomp></Homecomp>
+    </View>
+    
   );
 }
 

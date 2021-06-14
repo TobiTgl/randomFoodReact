@@ -2,6 +2,7 @@ import React from 'react'
 import { View, Text, StyleSheet, Button, TouchableHighlight } from 'react-native'
 import { Entypo } from '@expo/vector-icons'; 
 
+
 export default function FoodListElement(props) {
     return (
         <View style={styles.container}>
@@ -16,6 +17,7 @@ export default function FoodListElement(props) {
                     <Entypo name="circle-with-cross" size={24} color="white" />
                 </View>
             </TouchableHighlight>
+           
         </View>
     )
 }
@@ -38,6 +40,9 @@ const styles = StyleSheet.create({
     },
     cross: {
         flex:0.3
-    }
+    },
+    gradient: {
+        ...StyleSheet.absoluteFillObject
+      }
     
   });

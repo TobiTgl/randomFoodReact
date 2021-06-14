@@ -26,7 +26,7 @@ export default function AddFoodPage(props) {
                 <TextInput 
                     ref={addTextInput}
                     placeholder={'Enter food here...'}
-                    style={{backgroundColor: 'grey', borderColor: 'gray', borderWidth: 1, borderRadius:10, color: 'black',height: 40, width:200, marginBottom: 10, alignSelf: 'center',}}
+                    style={{backgroundColor: 'white', borderColor: 'gray', borderWidth: 1, borderRadius:10, color: 'black',height: 40, width:200, marginBottom: 10, alignSelf: 'center',}}
                     onChangeText={(text)=> props.onTypeFood(text)}
                     onSubmitEditing={()=> {props.onInsertNewFood();addTextInput.current.clear(); addCategoryInput.current.clear()}}
                     
@@ -36,25 +36,14 @@ export default function AddFoodPage(props) {
                 <TextInput 
                     ref={addCategoryInput}
                     placeholder={'Enter category here...'}
-                    style={{backgroundColor: 'grey', borderColor: 'gray', borderWidth: 1, borderRadius:10, color: 'black',height: 40, width:200, marginBottom: 10, alignSelf: 'center',}}
+                    style={{backgroundColor: 'white', borderColor: 'gray', borderWidth: 1, borderRadius:10, color: 'black',height: 40, width:200, marginBottom: 10, alignSelf: 'center',}}
                     onChangeText={(text)=> props.onTypeCategory(text)}
                     onSubmitEditing={()=> {props.onInsertNewFood();addCategoryInput.current.clear(); addCategoryInput.current.clear()}}
                     
                     >
                 
                 </TextInput>
-                <AwesomeButton 
-                    stretch
-                    onPress={()=>{ props.onInsertNewFood(); addTextInput.current.clear(); addCategoryInput.current.clear()}}
-                    ExtraContent={
-                        <LinearGradient
-                            colors={["green", "green", "green", "green"]}
-                            style={styles.gradient}/>
-                    }
-                    
-                >
-                        Add New Food
-                </AwesomeButton>
+                
                 <Button color="green" title="Add new food" onPress={()=>{ props.onInsertNewFood(); addTextInput.current.clear(); addCategoryInput.current.clear()}}></Button>
             </View>
             <View style={styles.headingContainer}>
