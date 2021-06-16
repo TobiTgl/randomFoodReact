@@ -40,7 +40,7 @@ export default function Homecomp(props) {
             
             let multipleArrss = []
 
-            for (let index = 0; index <5; index++) {
+            for (let index = 0; index <7; index++) {
             
                 arrprep.map((s)=> multipleArrss.push(s) ) 
             }
@@ -138,11 +138,15 @@ export default function Homecomp(props) {
        try {
                 const jsonValue = await AsyncStorage.getItem('foodArr')
                 const fok = JSON.parse(jsonValue)
+                console.log(fok)
+                if(fok!== null){
                 fok.sort((a, b) => (a.category > b.category) ? 1 : (a.category === b.category) ? ((a.name > b.name) ? 1 : -1) : -1 )
                 console.log("get stuff")
                 setFoodArr(fok)
                 slotArrPrep()
+                }
                 return jsonValue != null ? JSON.parse(jsonValue) : null;
+
             } catch(e) {
                 // error reading value
 
